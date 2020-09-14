@@ -281,14 +281,7 @@
 
 		},
 		_isTouchDevice: function () {
-			// I know, sniffing is a really bad idea, but it works 99% of the times
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				return true;
-			}
-			// iPad Pro pretends to be a Mac, but Macs don't have touch controls
-			if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) {
-				return true;
-			}
+			return false;
 		},
 		_addEventsToInput: function (input, inputnumber) {
 
