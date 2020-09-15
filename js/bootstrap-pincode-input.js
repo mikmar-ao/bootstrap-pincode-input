@@ -114,7 +114,7 @@
 			if (this.settings.hidedigits) {
 				this._pwcontainer = $('<div />').css("display", "none").appendTo(this._container);
 				this._pwfield = $('<input>').attr({
-                    'type': this.settings.inputtype,
+					'type': this.settings.inputtype,
 					'pattern': this.settings.pattern,
 					'inputmode': this.settings.inputmode,
 					'id': 'preventautofill',
@@ -154,8 +154,6 @@
 					});
 				},0);
 
-				
-
 				var touchtable = $('<div>').addClass('touch-flex').appendTo(wrapper);
 				// create touch background elements (for showing user how many digits must be entered)
 				for (var i = 0; i < this.settings.inputs; i++) {
@@ -171,7 +169,7 @@
 				} else {
 					// show digits, also include default value
 					input.val($(this.element).val());
-                }
+				}
 
 				// add events
 				this._addEventsToInput(input, 1);
@@ -202,11 +200,15 @@
 						input.addClass('mid');
 					}
 
+					if (i != (this.settings.inputs - 1)) {
+						var devider = $('<div />').html('<div></div>').addClass('divider').appendTo(this._container);
+					}
+
 					// add events
 					this._addEventsToInput(input, (i + 1));
 				}
 			}
-			
+
 			// hide original element and place this before it
 			$(this.element).css("display", "none");
 			this._container.insertBefore(this.element);
@@ -245,12 +247,11 @@
 				$('.pincode-input-text', this._container).each(function (index, input) {
 					$(input).val(value);
 				});
-				
 
 				// a hack to prevent visual issues on mobile devices
-				$(this.element).addClass("noletterspacing");						
+				$(this.element).addClass("noletterspacing");
 				$(this.element).select();
-				$(this.element).blur();							
+				$(this.element).blur();
 				$(this.element).removeClass("noletterspacing");
 
 				// update original input box
@@ -294,8 +295,8 @@
 				e.preventDefault();
 
 				var clipboardData =  (e.originalEvent || e).clipboardData || window.clipboardData;
-    			var pastedData = clipboardData.getData('text/plain');
-				
+				var pastedData = clipboardData.getData('text/plain');
+
 				this._setValue(pastedData,e);
 
 			},this));
@@ -343,11 +344,11 @@
 					// on backspace or delete go to previous input box
 					if (e.keyCode == 8 || e.keyCode == 46) {
 						// goto previous
-						$(e.currentTarget).prev().select();
-						$(e.currentTarget).prev().focus();
+						$(e.currentTarget).prev().prev().select();
+						$(e.currentTarget).prev().prev().focus();
 					} else if ($(e.currentTarget).val() != "") {
-						$(e.currentTarget).next().select();
-						$(e.currentTarget).next().focus();
+						$(e.currentTarget).next().next().select();
+						$(e.currentTarget).next().next().focus();
 					}
 				}
 
@@ -371,21 +372,17 @@
 						// do nothing on backspace and delete
 					} else if ($(this.element).val().length == this.settings.inputs) {
 						$(e.currentTarget).addClass("noletterspacing");
-						
+
 						$(e.currentTarget).select();
-						$(e.currentTarget).blur();		
-						
+						$(e.currentTarget).blur();
+
 						$(e.currentTarget).removeClass("noletterspacing");
-										
+
 					}
 				}
 
 			}, this));
-
-
 		}
-
-
 	});
 
 	// A really lightweight plugin wrapper around the constructor,
