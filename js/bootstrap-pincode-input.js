@@ -226,7 +226,7 @@
 			});
 		},
 		focus: function () {
-			$('.pincode-input-text', this._container).first().select().focus();
+			$('.pincode-input-text', this._container).first().focus();
 		},
 		clear: function () {
 			$('.pincode-input-text', this._container).each(function (index, value) {
@@ -354,10 +354,10 @@
 					// on backspace or delete go to previous input box
 					if (e.keyCode == 8 || e.keyCode == 46) {
 						// goto previous
-						$(e.currentTarget).prev().prev().select();
+						//$(e.currentTarget).prev().prev().select();
 						$(e.currentTarget).prev().prev().focus();
 					} else if ($(e.currentTarget).val() != "") {
-						$(e.currentTarget).next().next().select();
+						//$(e.currentTarget).next().next().select();
 						$(e.currentTarget).next().next().focus();
 					}
 				}
@@ -383,7 +383,7 @@
 					} else if ($(this.element).val().length == this.settings.inputs) {
 						$(e.currentTarget).addClass("noletterspacing");
 
-						$(e.currentTarget).select();
+						//$(e.currentTarget).select();
 						$(e.currentTarget).blur();
 
 						$(e.currentTarget).removeClass("noletterspacing");
