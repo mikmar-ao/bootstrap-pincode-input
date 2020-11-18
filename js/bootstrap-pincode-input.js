@@ -88,12 +88,9 @@
 			} else {
 				return isComplete;
 			}
-
-
 		},
 		buildInputBoxes: function () {
 			this._container = $('<div />').addClass('pincode-input-container');
-
 
 			var currentValue = [];
 			var placeholders = [];
@@ -179,9 +176,10 @@
 				for (var i = 0; i < this.settings.inputs; i++) {
 
 					var input = $('<input>').attr({
-						'type': 'text',
+						'type': 'tel',
 						'maxlength': "1",
 						'autocomplete': 'off',
+						'data-number': i,
 						'placeholder': (placeholders[i] ? placeholders[i] : undefined)
 					}).addClass(this.settings.inputclass + ' form-control pincode-input-text').appendTo(this._container);
 					if (this.settings.hidedigits) {
@@ -282,12 +280,24 @@
 
 		},
 		_isTouchDevice: function () {
-			return false;
+			return false
 		},
 		_addEventsToInput: function (input, inputnumber) {
 
-			input.on('focus', function (e) {
-				this.select();  // automatically select current value
+			input.on('click', function (e) {
+
+				let firstEmptyInput = null;
+
+				$('input.pincode-input-text').each(function() {
+					if ($.trim($(this).val()) == "") {
+						firstEmptyInput = $(this);
+						return false;
+					}
+				});
+
+				if (firstEmptyInput != null && firstEmptyInput.data('number') != inputnumber) {
+					firstEmptyInput.focus();
+				}
 			});
 
 			// paste event should call onchange and oncomplete callbacks
